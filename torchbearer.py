@@ -34,6 +34,12 @@ def explain_problem():
 
     TODO
     """
+
+    print("A single run can only give us the cheapest cost from the start node to the other nodes.")
+    print("It won't give us the decision on which relic chamber will be visited in that order.")
+    print("After all inter-location costs are known, we only have the order of which relics should be collected before the exit is reached.")
+    print("This requires a search over orders because each possible relic visitation order can produce a different total fuel cost.")
+
     return "TODO"
 
 

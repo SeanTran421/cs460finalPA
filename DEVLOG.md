@@ -3,19 +3,13 @@
 **Student Name:** Sean Tran
 **Student ID:** 826491452
 
-> Instructions: Write at least four dated entries. Required entry types are marked below.
-> Two to five sentences per entry is sufficient. Write entries as you go, not all in one
-> sitting. Graders check that entries reflect genuine work across multiple sessions.
-> Delete all blockquotes before submitting.
-
 ---
 
-## Entry 1 – [Date]: Initial Plan
+## Entry 1 – [May 12, 2026]: Initial Plan
 
-> Required. Write this before writing any code. Describe your plan: what you will
-> implement first, what parts you expect to be difficult, and how you plan to test.
-
-_Your entry here._
+The plan is straight. Forward. Such. We first implement Dijkstra's algorithm because every later part depends on the correct shortest path. 
+After that, the recursive search will also be implemented for the relic visitation orders and finally add pruning to not go to any other paths.
+Expecting the recursive search and pruning correctiveness to be hard so I plan to test using the provided graph for said implementations.
 
 ---
 

@@ -8,17 +8,15 @@
 
 ## Part 1: Problem Analysis
 
-> Document why this problem is not just a shortest-path problem. Three bullet points, one
-> per question. Each bullet should be 1-2 sentences max.
-
 - **Why a single shortest-path run from S is not enough:**
-  _Your answer here._
+  A single run from S only tells us the cheapest cost from the beginning node to the other nodes. 
+  It cannot decide which relic chamber should be visited first, second, third, and so on.
 
 - **What decision remains after all inter-location costs are known:**
-  _Your answer here._
+  The decision remains is the order in which the relics should be collected before it reached the exit,
 
 - **Why this requires a search over orders (one sentence):**
-  _Your answer here._
+  This is a search over orders because each possible relic visitation order can produce a different total fuel cost.
 
 ---
 
