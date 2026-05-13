@@ -24,70 +24,57 @@
 
 ### Part 2a: Source Selection
 
-> List the source node types as a bullet list. For each, one-line reason.
-
 | Source Node Type | Why it is a source |
 |---|---|
-| _node type_ | _one-line reason_ |
-| _node type_ | _one-line reason_ |
+| Start node | This is the entrance so we would need shortest distances from the start to the rest of the relics |
+| Relic nodes | After collecting a relic, the route may go find another one or head to the exit|
 
 ### Part 2b: Distance Storage
 
-> Fill in the table. No prose required.
-
 | Property | Your answer |
 |---|---|
-| Data structure name | |
-| What the keys represent | |
-| What the values represent | |
-| Lookup time complexity | |
-| Why O(1) lookup is possible | |
+| Data structure name | nested dictionary 'dist_table' |
+| What the keys represent | The outer keys are source nodes; inner keys are destination nodes |
+| What the values represent | The shortest path fuel cost from the source node to the destination node |
+| Lookup time complexity | O(1) |
+| Why O(1) lookup is possible | Python dictionaries use hash-table lookup for keys. |
 
 ### Part 2c: Precomputation Complexity
 
-> State the total complexity and show the arithmetic. Two to three lines max.
-
-- **Number of Dijkstra runs:** _your answer_
-- **Cost per run:** _your answer_
-- **Total complexity:** _your answer_
-- **Justification (one line):** _your answer_
+- **Number of Dijkstra runs:** 'k+1'
+- **Cost per run:** 'O(m log n)'
+- **Total complexity:** 'O((k+1) m log n)'
+- **Justification (one line):** The algorithm runs Dijkstra once from spawn node and once from each of the 'k' relic nodes
 
 ---
 
 ## Part 3: Algorithm Correctness
 
-> Document your understanding of why Dijkstra produces correct distances.
-> Bullet points and short sentences throughout. No paragraphs.
-
 ### Part 3a: What the Invariant Means
 
-> Two bullets: one for finalized nodes, one for non-finalized nodes.
-> Do not copy the invariant text from the spec.
-
 - **For nodes already finalized (in S):**
-  _Your answer here._
+  Once a node is finalized, the distance stored for it is the true minimum cost from the source. Algorithm will not need to improve that later.
 
 - **For nodes not yet finalized (not in S):**
-  _Your answer here._
+  The distances of the nodes are the best paths discovered so far using only already-finalized nodes as intermediate steps. The values may improve later on.
 
 ### Part 3b: Why Each Phase Holds
 
-> One to two bullets per phase. Maintenance must mention nonnegative edge weights.
-
 - **Initialization : why the invariant holds before iteration 1:**
-  _Your answer here._
+  At the start, the source has distance '0' and all other nodes have distance 'infinity'. No nodes are finalized yet, so the discovered distances are valid starting estimates.
 
 - **Maintenance : why finalizing the min-dist node is always correct:**
-  _Your answer here._
+  The node with the smallest distance cannot be improved by going through another unfinished node because all edge weights are negative. Any alternate path through that node would at least be as large as the current minimum.
 
 - **Termination : what the invariant guarantees when the algorithm ends:**
-  _Your answer here._
+  The invariant gurantees that every reachable node has their own true shortest path distance from the source once the algorithm ends.
+  Any unreachable nodes remain as 'infinity'
 
 ### Part 3c: Why This Matters for the Route Planner
 
 > One sentence connecting correct distances to correct routing decisions.
 
-_Your answer here._
+Correct distances let the route planner compare relic orders using the real minimum travel cost between locations.
 
 ---
 

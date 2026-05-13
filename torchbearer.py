@@ -203,6 +203,22 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
 
     TODO
     """
+    best = [float('inf'), []]
+
+    relics_remaining = set(relics)
+
+    _explore(
+        dist_table,
+        spawn,
+        relics_remaining,
+        [],
+        0,
+        exit_node,
+        best,
+    )
+
+    return (best[0], best[1])
+
     pass
 
 
@@ -235,6 +251,47 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
     explaining why it is safe (cannot skip the optimal solution).
     This comment is graded.
     """
+
+    #The pruning condition is safe because all weights are nonegative, so the continuing search would only increase the total cost.
+    #If cost_so_far already exceeded the best solution found, the branch cannot become optimal.
+
+    if cost_so_far >= best[0]:
+        return
+
+    #Base case
+    if not relics_remaining:
+
+        exit_cost = dist_table[current_loc][exit_node]
+
+        if exit_cost != float('inf'):
+            total_cost = cost_so_far + exit_cost
+
+            if total_cost < best[0]:
+                best[0] = total_cost
+                best[1] = relics_visited_order.copy()
+
+        return
+    
+    #Recursive case
+    for relic in list(relics_remaining):
+        travel_cost = dist_table[current_loc][relic]
+
+        if travel_cost == float('inf'):
+            continue
+
+        relics_remaining.remove(relic)
+        relics_visited_order.append(relic)
+
+        _explore(
+            dist_table,
+            relic,
+            relics_remaining,
+            relics_visited_order,
+            cost_so_far + travel_cost,
+            exit_node,
+            best
+        )
+
     pass
 
 
@@ -259,6 +316,20 @@ def solve(graph, spawn, relics, exit_node):
 
     TODO
     """
+    dist_table = precompute_distances(
+        graph,
+        spawn,
+        relics,
+        exit_node
+    )
+
+    return find_optimal_route(
+        dist_table,
+        spawn,
+        relics,
+        exit_node
+    )
+
     pass
 
 
