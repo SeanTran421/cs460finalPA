@@ -21,9 +21,9 @@ I fixed this by re-adding relics and popping from the visited order once recursi
 
 ---
 
-## Entry 3 – [Date]: [Short description]
+## Entry 3 – [May 13, 2026]: Pruning Validation and Edge Cases
 
-_Your entry here._
+After fixing the recursive search behavior, I focused on validating the pruning logic and testing edge cases. I confirmed that pruning using 'cost_so_far >= best_cost' was safe because all edge weights are nonnegative, meaning future exploration can only increase total cost. I also tested unreachable-path cases to ensure the algorithm correctly returned '(inf, [])' when no valid exit route existed.
 
 ---
 

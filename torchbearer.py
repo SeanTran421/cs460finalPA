@@ -256,7 +256,7 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
     #If cost_so_far already exceeded the best solution found, the branch cannot become optimal.
 
     if cost_so_far >= best[0]:
-        return
+        
 
     #Base case
     if not relics_remaining:

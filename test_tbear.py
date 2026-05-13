@@ -2,22 +2,24 @@ from torchbearer import (
     select_sources,
     run_dijkstra,
     precompute_distances,
+    solve
 )
 
 graph = {
-    'A': [('B', 1), ('C', 4)],
-    'B': [('C', 2)],
-    'C': []
+    'S': [('A', 10), ('B', 1)],
+    'A': [('B', 1), ('T', 1)],
+    'B': [('A', 1), ('T', 100)],
+    'T': []
 }
 
-print(run_dijkstra(graph, 'A'))
-
-print(select_sources('S', ['A', 'B'], 'T'))
+cost, order = solve(graph, 'S', ['A', 'B'], 'T')
+print(cost, order)
 
 graph = {
-    'S':[('R', 2)],
-    'R':[('T', 3)],
-    'T':[]
+    'S': [('R', 1)],
+    'R': [],
+    'T': []
 }
 
-print(precompute_distances(graph,'S', ['R'], 'T'))
+cost, order = solve(graph, 'S', ['R'], 'T')
+print(cost, order)
