@@ -13,12 +13,11 @@ Expecting the recursive search and pruning correctiveness to be hard so I plan t
 
 ---
 
-## Entry 2 – [Date]: [Short description]
+## Entry 2 – [May 13, 2026]: Fixing Recursive Search State
 
-> Required. At least one entry must describe a bug, wrong assumption, or design change
-> you encountered. Describe what went wrong and how you resolved it.
-
-_Your entry here._
+While implementing _explore, I forgot to restore the search state after recursive calls in '_explore'.
+Relics removed from the remaining state stayed removed for later branches, which may cause some visitation orders to never be explored.
+I fixed this by re-adding relics and popping from the visited order once recursion return.
 
 ---
 

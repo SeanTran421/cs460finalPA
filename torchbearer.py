@@ -292,6 +292,10 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
             best
         )
 
+        #Backtrack: undo the choice so the next branch starts with the original state
+        relics_visited_order.pop()
+        relics_remaining.add(relic)
+
     pass
 
 
