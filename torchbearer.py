@@ -62,6 +62,14 @@ def select_sources(spawn, relics, exit_node):
 
     TODO
     """
+    sources = [spawn]
+
+    for relic in relics:
+        if relic not in sources:
+            sources.append(relic)
+
+    return sources
+
     pass
 
 
@@ -81,6 +89,30 @@ def run_dijkstra(graph, source):
 
     TODO
     """
+    dist = {}
+
+    for node in graph:
+        dist[node] = float('inf')
+    
+    dist[source] = 0
+
+    pq = [(0, source)]
+
+    while pq:
+        current_dist, node = heapq.heappop(pq)
+
+        if current_dist > dist[node]:
+            continue
+
+        for neighbor, cost in graph[node]:
+            new_dist = current_dist + cost
+
+            if new_dist < dist[neighbor]:
+                dist[neighbor] = new_dist
+                heapq.heappush(pq, (new_dist, neighbor))
+
+    return dist
+
     pass
 
 
@@ -101,6 +133,15 @@ def precompute_distances(graph, spawn, relics, exit_node):
 
     TODO
     """
+    dist_table = {}
+
+    sources = select_sources(spawn, relics, exit_node)
+
+    for source in sources:
+        dist_table[source] = run_dijkstra(graph, source)
+    
+    return dist_table
+
     pass
 
 

@@ -16,7 +16,7 @@
   The decision remains is the order in which the relics should be collected before it reached the exit,
 
 - **Why this requires a search over orders (one sentence):**
-  This is a search over orders because each possible relic visitation order can produce a different total fuel cost.
+  This requires a search over orders because each possible relic visitation order can produce a different total fuel cost.
 
 ---
 
