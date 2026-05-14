@@ -27,27 +27,22 @@ After fixing the recursive search behavior, I focused on validating the pruning 
 
 ---
 
-## Entry 4 – [Date]: Post-Implementation Reflection
+## Entry 4 – [May 14, 2026]: Post-Implementation Reflection
 
-> Required. Written after your implementation is complete. Describe what you would
-> change or improve given more time.
-
-_Your entry here._
+_The pruning strategy was correct, but fairly simple. If I had more time, I'd improve the lower bound estimates to prune more branches earlier and reduce unnecessary recursive exploration. I would also consider dynamic programming to avoid recomputing equivalent search states. Another improvement would be reconstructing the full path through intermediate nodes instead of only returning the relic visitation order._
 
 ---
 
-## Final Entry – [Date]: Time Estimate
-
-> Required. Estimate minutes spent per part. Honesty is expected; accuracy is not graded.
+## Final Entry – [May 14, 2026]: Time Estimate
 
 | Part | Estimated Hours |
 |---|---|
-| Part 1: Problem Analysis | |
-| Part 2: Precomputation Design | |
-| Part 3: Algorithm Correctness | |
-| Part 4: Search Design | |
-| Part 5: State and Search Space | |
-| Part 6: Pruning | |
-| Part 7: Implementation | |
-| README and DEVLOG writing | |
-| **Total** | |
+| Part 1: Problem Analysis | 0.4 |
+| Part 2: Precomputation Design | 1 |
+| Part 3: Algorithm Correctness | 1 |
+| Part 4: Search Design | 0.5 |
+| Part 5: State and Search Space | 1 |
+| Part 6: Pruning | 1 |
+| Part 7: Implementation | 3 |
+| README and DEVLOG writing | 1.5 |
+| **Total** | 9.4 |

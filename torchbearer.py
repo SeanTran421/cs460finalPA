@@ -2,8 +2,8 @@
 CS 460 – Algorithms: Final Programming Assignment
 The Torchbearer
 
-Student Name: ___________________________
-Student ID:   ___________________________
+Student Name: Sean Tran
+Student ID:   826491452
 
 INSTRUCTIONS
 ------------
@@ -35,12 +35,12 @@ def explain_problem():
     TODO
     """
 
-    print("A single run can only give us the cheapest cost from the start node to the other nodes.")
-    print("It won't give us the decision on which relic chamber will be visited in that order.")
-    print("After all inter-location costs are known, we only have the order of which relics should be collected before the exit is reached.")
-    print("This requires a search over orders because each possible relic visitation order can produce a different total fuel cost.")
-
-    return "TODO"
+    return """
+    A single run can only give us the cheapest cost from the start node to the other nodes.
+    It won't give us the decision on which relic chamber will be visited in that order.
+    After all inter-location costs are known, we only have the order of which relics should be collected before the exit is reached.
+    This requires a search over orders because each possible relic visitation order can produce a different total fuel cost.
+    """
 
 
 # =============================================================================
@@ -69,8 +69,6 @@ def select_sources(spawn, relics, exit_node):
             sources.append(relic)
 
     return sources
-
-    pass
 
 
 def run_dijkstra(graph, source):
@@ -113,7 +111,6 @@ def run_dijkstra(graph, source):
 
     return dist
 
-    pass
 
 
 def precompute_distances(graph, spawn, relics, exit_node):
@@ -142,8 +139,6 @@ def precompute_distances(graph, spawn, relics, exit_node):
     
     return dist_table
 
-    pass
-
 
 # =============================================================================
 # PART 3
@@ -159,7 +154,20 @@ def dijkstra_invariant_check():
 
     TODO
     """
-    return "TODO"
+    return """
+    Once a node is finalized, the distance stored for it is the true minimum cost from the source. Algorithm will not need to improve that later.
+
+    The distances of the nodes are the best paths discovered so far using only already-finalized nodes as intermediate steps. The values may improve later on.
+
+    At the start, the source has distance 0 and all other nodes have distance infinity. No nodes are finalized yet, so the discovered distances are valid starting estimates.
+
+    The node with the smallest distance cannot be improved by going through another unfinished node because all edge weights are nonnegative. Any alternate path through that node would at least be as large as the current minimum.
+
+    The invariant gurantees that every reachable node has their own true shortest path distance from the source once the algorithm ends.
+    Any unreachable nodes remain as infinity.
+
+    Correct distances let the route planner compare relic orders using the real minimum travel cost between locations.
+    """
 
 
 # =============================================================================
@@ -176,7 +184,16 @@ def explain_search():
 
     TODO
     """
-    return "TODO"
+
+    return """
+    The failure mode: A greedy strategy may pick the closest node, but the local choice could potentially have us spend a lot more fuel.
+    Counter-example setup: In the example, the important nodes are 'S', relics 'B', 'C', 'D', and exit 'T'.
+    What greedy picks: Greedy could pick S to C because C has low immediate cost from 'S' and a series would be 'C -> B -> D -> T' for total cost of 5.
+    What optimal picks: The optimal route would be S -> B -> D -> C -> T and the total cost would be 4.
+    Why greedy loses: Greedy only considers the cheapest step first, while the optimal route depends on the full relic order affects the cost.
+
+    The algorithm must explore different relic visitation **order** choices because the cheapest next relic may not give us the total cheaper cost in whole.
+    """
 
 
 # =============================================================================
@@ -219,9 +236,6 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
 
     return (best[0], best[1])
 
-    pass
-
-
 def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
              cost_so_far, exit_node, best):
     """
@@ -256,7 +270,7 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
     #If cost_so_far already exceeded the best solution found, the branch cannot become optimal.
 
     if cost_so_far >= best[0]:
-        
+        return
 
     #Base case
     if not relics_remaining:
@@ -296,8 +310,6 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
         relics_visited_order.pop()
         relics_remaining.add(relic)
 
-    pass
-
 
 # =============================================================================
 # PIPELINE
@@ -333,8 +345,6 @@ def solve(graph, spawn, relics, exit_node):
         relics,
         exit_node
     )
-
-    pass
 
 
 # =============================================================================
